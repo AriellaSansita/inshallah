@@ -46,7 +46,7 @@ if "mascot_on" not in st.session_state:
 # -------------------------------
 # Custom CSS for colorful background & buttons
 st.markdown("""
-    <style>
+   
     body {
         background: linear-gradient(to right, #4FD1C5, #60A5FA);
     }
@@ -61,7 +61,7 @@ st.markdown("""
         background-color: #2563EB;
         color: white;
     }
-    </style>
+
 """, unsafe_allow_html=True)
 
 # -------------------------------
