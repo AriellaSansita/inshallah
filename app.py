@@ -93,7 +93,7 @@ elif st.session_state.phase == 3:
 elif st.session_state.phase == 4:
     st.title("WaterBuddy Dashboard")
 
-    st.markdown(f"### Age group: **{st.session_state.age_group}**")
+    st.markdown(f"### Age group: {st.session_state.age_group}")
     st.markdown(f"### Daily goal: **{st.session_state.goal} ml**")
 
     st.write("")
