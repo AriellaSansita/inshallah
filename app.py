@@ -3,9 +3,9 @@ import random
 
 AGE_GROUPS = {
     "Children (4-8 years)": 1200,
-    "Teens (9-13 years)": 1700,
+    "Teens (9-13 years)  ": 1700,
     "Adults (14-64 years)": 2200,
-    "Seniors (65+ years)": 1800,
+    "Seniors (65+ years) ": 1800,
 }
 
 HYDRATION_TIPS = [
