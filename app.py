@@ -24,8 +24,6 @@ if "goal" not in st.session_state:
     st.session_state.goal = 0
 if "total" not in st.session_state:
     st.session_state.total = 0
-if "log_pref" not in st.session_state:
-    st.session_state.log_pref = "quick"
 if "show_tips" not in st.session_state:
     st.session_state.show_tips = True
 if "mascot_on" not in st.session_state:
@@ -136,11 +134,7 @@ elif st.session_state.phase == 4:
     # ------------------------------------------------------
     total = st.session_state.total
     goal = st.session_state.goal
-
-    if goal > 0:
-        progress = min(total / goal, 1.0)
-    else:
-        progress = 0
+    progress = min(total / goal, 1.0)
 
     st.markdown("### 📊 Progress")
     st.progress(progress)
@@ -172,16 +166,59 @@ elif st.session_state.phase == 4:
     st.write("")
 
     # ------------------------------------------------------
-    #   5) RESET BUTTON (after mascot)
+    #   5) RESET + SUMMARY
     # ------------------------------------------------------
-    st.button("New Day (Reset)", on_click=reset_day)
+    colA, colB = st.columns(2)
+    with colA:
+        st.button("New Day (Reset)", on_click=reset_day)
+    with colB:
+        if st.button("View Summary"):
+            st.session_state.phase = 5
 
     st.write("")
 
     # ------------------------------------------------------
-    #   6) TIP OF THE DAY (last)
+    #   6) TIP OF THE DAY
     # ------------------------------------------------------
     if st.session_state.show_tips:
         st.write("---")
         st.write("💡 Tip of the day:")
         st.write(random.choice(HYDRATION_TIPS))
+
+# ------------------------------------------------------
+#                  END-OF-DAY SUMMARY PAGE
+# ------------------------------------------------------
+
+elif st.session_state.phase == 5:
+    st.title("🌙 End-of-Day Summary")
+
+    total = st.session_state.total
+    cups = round(total / 240, 2)
+    goal = st.session_state.goal
+    progress = min(total / goal, 1.0)
+
+    st.subheader("Total Intake")
+    st.write(f"💧 {total} ml  ({cups} cups)")
+
+    st.subheader("Progress Percentage")
+    st.write(f"{progress * 100:.1f}% of {goal} ml")
+
+    st.subheader("Status")
+    if total >= goal:
+        st.success("Goal Achieved! 🌟")
+    else:
+        st.info("Keep Trying! 💪")
+
+    st.markdown("## 🐢 Great effort today!")
+
+    st.write("---")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("Start New Day"):
+            st.session_state.total = 0
+            st.session_state.phase = 4
+    with col2:
+        if st.button("Back to Dashboard"):
+            st.session_state.phase = 4
+
