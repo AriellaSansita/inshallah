@@ -16,6 +16,9 @@ HYDRATION_TIPS = [
     "Hydrate after exercise to recover faster."
 ]
 
+# -----------------------------------------------------
+# SESSION STATE
+# -----------------------------------------------------
 if "phase" not in st.session_state:
     st.session_state.phase = 1
 if "age_group" not in st.session_state:
@@ -31,6 +34,9 @@ if "show_tips" not in st.session_state:
 if "mascot_on" not in st.session_state:
     st.session_state.mascot_on = True
 
+# -----------------------------------------------------
+# STYLING
+# -----------------------------------------------------
 st.markdown("""
     <style>
     body {
@@ -50,6 +56,9 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# -----------------------------------------------------
+# HELPERS
+# -----------------------------------------------------
 def start_app():
     st.session_state.phase = 2
 
@@ -64,20 +73,23 @@ def continue_to_dashboard():
 def reset_day():
     st.session_state.total = 0
 
-# ------------------------------------------------------
-#                  SCREENS / PHASES
-# ------------------------------------------------------
+# -----------------------------------------------------
+# SCREENS
+# -----------------------------------------------------
 
+# ------------------ WELCOME -------------------------
 if st.session_state.phase == 1:
     st.title("Welcome to WaterBuddy")
     st.write("Your friendly daily hydration companion.")
     st.button("Let's begin", on_click=start_app)
 
+# ------------------ AGE SELECT ----------------------
 elif st.session_state.phase == 2:
     st.header("Select your age group")
     for group, ml in AGE_GROUPS.items():
         st.button(group, on_click=select_age, args=(group, ml))
 
+# ------------------ SET GOAL ------------------------
 elif st.session_state.phase == 3:
     st.header("Adjust your daily goal")
     st.write(f"Recommended goal for {st.session_state.age_group}: {AGE_GROUPS[st.session_state.age_group]} ml")
@@ -90,14 +102,15 @@ elif st.session_state.phase == 3:
     )
     st.button("Continue", on_click=continue_to_dashboard)
 
+# ------------------ DASHBOARD -----------------------
 elif st.session_state.phase == 4:
     st.title("WaterBuddy Dashboard")
     st.write(f"**Age group:** {st.session_state.age_group}")
     st.write(f"**Daily goal:** {st.session_state.goal} ml")
 
-    # ------------------------------------------------------
-    #        NEW QUICK ADD BUTTONS + CUSTOM ADD
-    # ------------------------------------------------------
+    # -----------------------------------------------------
+    # QUICK ADD SECTION
+    # -----------------------------------------------------
     st.subheader("Quick Add Water")
 
     col1, col2, col3, col4 = st.columns(4)
@@ -116,13 +129,18 @@ elif st.session_state.phase == 4:
             st.session_state.total += 1000
 
     st.subheader("Custom Amount (ml)")
-    custom = st.number_input("Enter amount:", min_value=0, step=50)
+    custom_amount = st.number_input("Enter amount:", min_value=0, step=50)
     if st.button("Add"):
-        st.session_state.total += custom
-    # ------------------------------------------------------
+        st.session_state.total += custom_amount
 
+    # -----------------------------------------------------
+    # RESET BUTTON (moved above tip)
+    # -----------------------------------------------------
     st.button("New Day (Reset)", on_click=reset_day)
 
+    # -----------------------------------------------------
+    # PROGRESS + NUMBERS
+    # -----------------------------------------------------
     remaining = max(st.session_state.goal - st.session_state.total, 0)
     progress = min(st.session_state.total / st.session_state.goal, 1.0)
 
@@ -131,6 +149,9 @@ elif st.session_state.phase == 4:
     st.write(f"**Remaining to goal:** {remaining} ml")
     st.write(f"**Progress:** {progress*100:.1f}%")
 
+    # -----------------------------------------------------
+    # MASCOT MESSAGES
+    # -----------------------------------------------------
     if st.session_state.mascot_on:
         if progress == 0:
             st.info("Let's start hydrating! 🙂")
@@ -144,8 +165,12 @@ elif st.session_state.phase == 4:
             st.balloons()
             st.success("🎉 Congratulations! You hit your hydration goal! 🥳")
 
+    # -----------------------------------------------------
+    # TIP OF THE DAY
+    # -----------------------------------------------------
     if st.session_state.show_tips:
         st.write("---")
         st.write("💡 Tip of the day:")
         st.write(random.choice(HYDRATION_TIPS))
+
 
