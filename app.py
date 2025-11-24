@@ -80,27 +80,14 @@ elif st.session_state.phase == 3:
     if st.button("Continue ➡️"):
         st.session_state.phase = 4
 
-
 elif st.session_state.phase == 4:
-    st.header("Step 3: Choose your logging preference")
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("Quick log (+250 ml)"):
-            st.session_state.log_pref = "quick"
-            st.session_state.phase = 5
-    with col2:
-        if st.button("Custom entry"):
-            st.session_state.log_pref = "custom"
-            st.session_state.phase = 5
-
-elif st.session_state.phase == 5:
     st.header("Step 4: Personalize your experience")
     st.session_state.show_tips = st.checkbox("Show daily hydration tips", value=True)
     st.session_state.mascot_on = st.checkbox("Enable mascot reactions", value=True)
     if st.button("Finish setup ✅"):
         st.session_state.phase = 6
 
-elif st.session_state.phase == 6:
+elif st.session_state.phase == 5:
     st.title("📊 WaterBuddy Dashboard")
     st.write(f"**Age group:** {st.session_state.age_group}")
     st.write(f"**Daily goal:** {st.session_state.goal} ml")
