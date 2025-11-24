@@ -173,7 +173,7 @@ elif st.session_state.phase == 4:
     # ------------------------------------------------------
     colA, colB = st.columns(2)
     with colA:
-        st.button("New Day (Reset)", on_click=reset_day)
+        st.button("New Day", on_click=reset_day)
     with colB:
         if st.button("View Summary"):
             st.session_state.phase = 5
