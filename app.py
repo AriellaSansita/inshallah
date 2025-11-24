@@ -80,14 +80,8 @@ elif st.session_state.phase == 3:
     if st.button("Continue ➡️"):
         st.session_state.phase = 4
 
-elif st.session_state.phase == 4:
-    st.header("Step 4: Personalize your experience")
-    st.session_state.show_tips = st.checkbox("Show daily hydration tips", value=True)
-    st.session_state.mascot_on = st.checkbox("Enable mascot reactions", value=True)
-    if st.button("Finish setup ✅"):
-        st.session_state.phase = 6
 
-elif st.session_state.phase == 5:
+elif st.session_state.phase == 4:
     st.title("📊 WaterBuddy Dashboard")
     st.write(f"**Age group:** {st.session_state.age_group}")
     st.write(f"**Daily goal:** {st.session_state.goal} ml")
