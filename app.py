@@ -221,7 +221,8 @@ elif st.session_state.phase == 5:
         if st.button("Start New Day"):
             st.session_state.total = 0
             st.session_state.phase = 4
+            st.rerun()  # Force immediate rerun for responsiveness
     with col2:
         if st.button("Back to Dashboard"):
             st.session_state.phase = 4
-
+            st.rerun()  # Force immediate rerun for responsiveness
