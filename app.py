@@ -79,7 +79,15 @@ elif st.session_state.phase == "dashboard":
 
     total = st.session_state.total
     goal = st.session_state.goal
-    progress = min(total / goal, 1) if goal else 0
+
+    # ----------------------------
+    # PROGRESS LOCK FIX
+    # ----------------------------
+    if total >= goal:
+        progress = 1.0      # lock at full
+    else:
+        progress = total / goal
+    # ----------------------------
 
     mascot, msg = turtle_mascot(progress)
     st.markdown(f"## {mascot}")
@@ -130,7 +138,15 @@ elif st.session_state.phase == "summary":
     total = st.session_state.total
     cups = round(total / CUP_ML, 2)
     goal = st.session_state.goal
-    pct = int((total / goal) * 100) if goal else 0
+
+    # ----------------------------
+    # PROGRESS LOCK FIX
+    # ----------------------------
+    if total >= goal:
+        pct = 100
+    else:
+        pct = int((total / goal) * 100)
+    # ----------------------------
 
     st.subheader("Total Intake")
     st.write(f"{total} ml  ({cups} cups)")
