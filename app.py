@@ -231,5 +231,36 @@ elif st.session_state.phase == 4:
     st.info(message)
 
     # TURTLE MASCOT
-    st.write("### 🐢
+    st.write("### 🐢 Mascot Reaction")
+    mascot_img = turtle_mascot(progress)
+    st.image(mascot_img, width=120)
 
+    # TIP
+    st.write("---")
+    st.write("💡 Tip of the day:")
+    st.write(random.choice(HYDRATION_TIPS))
+
+    # Buttons
+    colA, colB = st.columns(2)
+    with colA: st.button("New Day", on_click=reset_day)
+    with colB: st.button("View Summary", on_click=view_summary)
+
+
+# ---------------- PHASE 5 — SUMMARY ----------------
+elif st.session_state.phase == 5:
+    st.title("🌙 End-of-Day Summary")
+
+    total = st.session_state.total
+    goal = st.session_state.goal
+    progress = calculate_progress(total, goal)
+
+    st.write(f"Total intake: **{total} ml**")
+    st.write(f"Progress: **{progress*100:.1f}%**")
+
+    if total >= goal:
+        st.success("Goal Achieved! 🌟")
+    else:
+        st.info("Keep Trying! 💪")
+
+    st.button("Start New Day", on_click=start_new_day)
+    st.button("Back to Dashboard", on_click=back_to_dashboard)
