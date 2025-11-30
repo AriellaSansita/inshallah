@@ -139,13 +139,14 @@ elif st.session_state.phase == 4:
         if st.button("+1000 ml"): add_water(1000)
 
     # CUSTOM ADD
-    st.write("### ✏️ Add custom amount")
+    st.write("custom amount")
     custom = st.number_input("Enter amount (ml):", min_value=0, step=50, value=0)
     if st.button("Add"):
         add_water(custom)
 
     # PROGRESS + MASCOT
-    st.write("### 📊 Progress")
+    st.write("---")
+    st.write("### Progress")
     total = st.session_state.total
     goal = st.session_state.goal
     progress = calculate_progress(total, goal)
@@ -157,8 +158,8 @@ elif st.session_state.phase == 4:
 
     # TIP
     st.write("---")
-    st.subheader("💡 Tip of the day:")
-    st.header(random.choice(HYDRATION_TIPS))
+    st.header("💡 Tip of the day:")
+    st.subheader(random.choice(HYDRATION_TIPS))
 
     # HISTORY / LOG
     st.write("### ⏱ Today's Log")
