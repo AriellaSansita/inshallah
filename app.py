@@ -189,8 +189,8 @@ elif st.session_state.phase == 5:
     goal = st.session_state.goal
     progress = calculate_progress(total, goal)
 
-    st.write(f"Total intake: **{total} ml**")
-    st.write(f"Progress: **{progress*100:.1f}%**")
+    st.subheader(f"Total intake: **{total} ml**")
+    st.subheader(f"Progress: **{progress*100:.1f}%**")
 
     if total >= goal:
         st.success("Goal Achieved! 🌟")
