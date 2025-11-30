@@ -1,8 +1,5 @@
 import streamlit as st
 import random
-import turtle
-from io import BytesIO
-from PIL import Image
 
 # ---------------- AGE + TIPS ----------------
 AGE_GROUPS = {
@@ -58,28 +55,18 @@ def get_message(progress):
 
 
 # ---------------- TURTLE MASCOT ----------------
-def turtle_mascot(progress):
-    screen = turtle.Screen()
-    screen.setup(width=300, height=300)
-    canvas = screen.getcanvas()
-
-    t = turtle.Turtle()
-    t.hideturtle()
-
-    if progress < 0.5:
-        t.write("🙂", align="center", font=("Arial", 40, "normal"))
+def get_mascot(progress):
+    if progress == 0:
+        return "🙂"
+    elif progress < 0.5:
+        return "😄"
     elif progress < 0.75:
-        t.write("😄", align="center", font=("Arial", 40, "normal"))
+        return "😎"
     elif progress < 1:
-        t.write("🤗", align="center", font=("Arial", 40, "normal"))
+        return "🤗"
     else:
-        t.write("🎉", align="center", font=("Arial", 40, "normal"))
+        return "🎉"
 
-    buffer = BytesIO()
-    canvas.postscript(file=buffer)
-    buffer.seek(0)
-    img = Image.open(buffer)
-    return img
 
 
 # ---------------- SIMPLE CSS + BOTTLE ----------------
