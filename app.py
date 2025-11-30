@@ -212,18 +212,17 @@ elif st.session_state.phase == 4:
         # Removed: st.info(message)
 
     with right:
-    st.write("### 🐢")
+    
+        st.markdown(
+            f"""
+            <div style='text-align:center;'>
+                <div style='font-size:80px; line-height:1;'>{mascot}</div>
+                <div style='font-size:16px; margin-top:8px;'>{message}</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-    st.markdown(
-        f"""
-        <div style='text-align:center;'>
-            <div style='font-size:110px; line-height:1; margin-bottom:10px;'>🐢</div>
-            <div style='font-size:90px; line-height:1;'>{mascot}</div>
-            <div style='font-size:16px; margin-top:8px;'>{message}</div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 
     # TIP OF THE DAY
     st.write("---")
